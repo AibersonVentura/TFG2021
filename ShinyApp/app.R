@@ -112,20 +112,20 @@ ui <- fluidPage(
             cade uno de los ejes mayor es el riesgo y el impacto del usuario, respectivamente. Nota que solo los clientes con póliza(s) en vigor están en el mapa.",
            plotOutput("mapR",height="800px"),
            h4("Gráfico de los efectos de las variables explicativas sobre las variables respuesta"),
-           "Ambos gráficos muestran, en cierta manera, el efecto de cada una de las variables explicativas sobre la variable respuesta respecto a un cierto nivel de referencia. Este nivel de referencia es el nivel de la variable categórica que se omite.",
-           "En caso de que la variable sea contínuas, como antigüedad en el gráfico de la variable impacto, se muestra el efecto medido por cada unidad que aumenta el valor de dicha variable numérica.",
+           "Ambos gráficos muestran el efecto de cada uno de los niveles de las variables explicativas sobre la variable respuesta respecto a un cierto nivel de referencia. Este nivel de referencia es el nivel de la variable categórica que se omite.",
+           "En caso de que la variable no sea categórica, como antigüedad en el gráfico de la variable impacto, se muestra el efecto por cada unidad que aumenta el valor de dicha variable numérica.",
            
            h5("Variable de Cancelación"),
            "El gráfico a continuación muestra el porcentaje de variación sobre las ODDS de cancelar alguna póliza al pasar del nivel de referencia, cuyo porcentaje siempre es 0, a otro nivel determinado.
-           Entonces, un valor positivo implica que las ODDS aumenta, y por lo tanto la probabilidad de cancelar una póliza también. Mientras que un valor negativo, implica que la probabilidad es menor en este nivel respecto al de referencia",
+           Entonces, un valor positivo implica que las odds son más elevadas en este nivel respecto al de referencia, mientras que  un valor negativo implica que las odds son más bajas.",
            div(""),
-           "A la izquierda del gráfica se encuentra la información sobre la variable y el efecto que tiene cada uno de sus niveles sobre las ODDS escritos de la siguiente manera:",
+           "A la izquierda del gráfico se encuentra la información sobre la variable y el efecto que tiene cada uno de sus niveles sobre las odds escritos de la siguiente manera:",
            div(""),
            em("Variable | Nivel | % de variación"),
           
             div(""),
            
-           "De esta manera, Antigüedad | (2,10] | -47% se debe leer cómo que los asegurados con una antigüedad superior a  2 y menor a 10 años tienen unas ODDS un 47% menores respecto al nivel de referencia, en este caso tener una antigüedad de menos de 2 años.",
+           "De esta manera, Antigüedad | (2,10] | -47% se debe leer como que los asegurados con una antigüedad superior a  2 y menor a 10 años tienen unas odds un 47% menores respecto al nivel de referencia, en este caso tener una antigüedad de menos de 2 años.",
            plotOutput("clevlogit",height="700px"),
            h5("Variable del impacto"),
            
@@ -138,9 +138,9 @@ ui <- fluidPage(
            
            div(""),
            
-           "De esta manera, Forma Pago | No Anual | -36% se debe leer cómo que los asegurados con una forma de pago No Anual tiene una media de impacto un 36% menor que los del nivel de referencia de la variable Forma de Pago, es decir la forma de pago Anual.
+           "De esta manera, Forma Pago | No Anual | -36% se debe leer como que los asegurados con una forma de pago No Anual tiene una media de impacto un 36% menor que los del nivel de referencia, es decir los quue han seleccionado la forma de pago Anual.
            ",
-           "En caso de que la variable sea numérica, como sucede con la variable antigüedad, no tiene niveles y el coeficiente el efecto se debe leer cómo la variación sobre la esperanza del impacto por cada unidad que aumenta la variable numérica.",
+           "En caso de que la variable sea numérica, como sucede con la variable antigüedad, no tiene niveles y el porcentaje de variación se debe leer como la variación sobre la esperanza del impacto por cada unidad que aumenta la variable numérica.",
            
            plotOutput("clevgamma",height="700px"),
            h4("Características del cliente seleccionado"),
@@ -366,13 +366,13 @@ output$mapR<- renderPlot({
         xr$perpc<- perpc
         
         
-        plot(xr$perpc,xr$perimp, ylab="Percentil Impacto(Yimp)",xlab="Percentil Probabilidad de Cancelar (Yc)", col=col,cex=1.6,pch=19)
+        plot(xr$perpc,xr$perimp, ylab="Percentil Impacto",xlab="Percentil Probabilidad de Cancelar ", col=col,cex=1.6,pch=19)
     
         points(xr$perpc[sel],xr$perimp[sel],col="red", pch=19,cex=2)
         
     }else{
         
-        plot(xr$pc,xr$pimp, ylab="Impacto(Yimp)",xlab="Probabilidad de Cancelar (Yc)", col=col,cex=1.6,pch=19)
+        plot(xr$pc,xr$pimp, ylab="Impacto",xlab="Probabilidad de Cancelar", col=col,cex=1.6,pch=19)
         
         points(xr$pc[sel],xr$pimp[sel],col="red", pch=19,cex=2)
     }
